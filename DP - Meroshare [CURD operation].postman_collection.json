@@ -1,0 +1,1484 @@
+{
+	"info": {
+		"_postman_id": "c51eb6c4-f7d6-4b15-84d8-7360fe0ee183",
+		"name": "DP - Meroshare [CURD operation]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26245045",
+		"_collection_link": "https://lively-flare-778719.postman.co/workspace/CASBA~d025fd56-bf58-4db5-816b-4a44dcb0fbee/collection/26245045-c51eb6c4-f7d6-4b15-84d8-7360fe0ee183?action=share&creator=26245045&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login-maker",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.set(\"username\",\"D-14700-maker\");\r",
+											"pm.variables.set(\"password\",\"admin\");\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var auth = pm.response.headers.get(\"Authorization\");\r",
+											" pm.collectionVariables.set(\"DP_M_Auth\", auth);\r",
+											"\r",
+											"\r",
+											"var schema = {\r",
+											"   \r",
+											"\"type\": \"object\"\r",
+											"};\r",
+											" pm.test(\"Validate schema\", () => {\r",
+											"pm.response.to.have.jsonSchema(schema);\r",
+											"});  \r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/dp/auth/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"dp",
+										"auth",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"D-14700-maker\",\r\n    \"password\": \"admin\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DP_URL}}/dp/auth/",
+											"host": [
+												"{{DP_URL}}"
+											],
+											"path": [
+												"dp",
+												"auth",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Payara Server  5.194 #badassfish"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Servlet/4.0 JSP/2.3 (Payara Server  5.194 #badassfish Java/Oracle Corporation/1.8)"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, DELETE, PUT, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Authorization"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Authorization"
+										},
+										{
+											"key": "Authorization",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmMXNvZnRDYXNiYSIsImF1ZCI6IkRQQWRtaW4iLCJleHAiOjE2ODUzNDA0NDUsImp0aSI6IjhGa193TEhTQjlxS1ZQMk80Y25xcXciLCJpYXQiOjE2ODUzMzg2NDUsIm5iZiI6MTY4NTMzODUyNSwic3ViIjoiY2FzYmEiLCJ1c2VybmFtZSI6IkQtMTQ3MDAtbWFrZXIiLCJpZCI6MTEsInRva2VuQ3JlYXRlZCI6IjIwMjMtMDUtMjkgMTE6MjI6MjUiLCJwcm9maWxlTmFtZSI6IkRQX01BS0VSX1BST0ZJTEUiLCJwcm9maWxlSWQiOjIsInJvbGVzIjpbIlJvb3QiLCJNYW5hZ2UgUGF5bWVudCBSZXBvcnQiLCJWaWV3IERlbWF0IFJlbmV3IiwiVmlldyBNZXJvIFNoYXJlIEN1c3RvbWVyIiwiRG93bmxvYWQgQmF0Y2ggUmVuZXdhbCIsIlJlaW5pdGlhdGUgTWVybyBTaGFyZSBDdXN0b21lciIsIkdlbmVyYXRlIEZpbGUiLCJNb2RpZnkgTWVybyBTaGFyZSBDdXN0b21lciIsIk1vZGlmeSBCcm9hZGNhc3QgTWVzc2FnZSIsIkRlbGV0ZSBCcm9hZGNhc3QgTWVzc2FnZSIsIkRlbGV0ZSBNZXJvIFNoYXJlIEN1c3RvbWVyIiwiVmlldyBCYW5rIFJlcXVlc3QiLCJSZW5ldyBEZW1hdCIsIk1lcm8gU2hhcmUgQ3VzdG9tZXIgUmVnaXN0cmF0aW9uIiwiVmlldyBCcm9hZGNhc3QgTWVzc2FnZSIsIlVwbG9hZCBCYXRjaCBSZW5ld2FsIiwiUmVzZXQgTWVybyBTaGFyZSBDdXN0b21lciBQYXNzd29yZCIsIkJsb2NrIE1lcm8gU2hhcmUgQ3VzdG9tZXIiLCJNYW5hZ2UgTWVybyBTaGFyZSBDdXN0b21lciIsIkNyZWF0ZSBCcm9hZGNhc3QgTWVzc2FnZSIsIlVuQmxvY2sgTWVybyBTaGFyZSBDdXN0b21lciIsIkFsbCBSZXF1ZXN0IExvZyIsIlZpZXcgQmF0Y2ggUmVuZXdhbCIsIk1hbmFnZSBCcm9hZGNhc3QgTWVzc2FnZSIsIkVESVMgUmVjb3JkcyBWaWV3IiwiTWVyb1NoYXJlIFN1bW1hcnkgUmVwb3J0IiwiQWRkIERlcGVuZGVudCBDdXN0b21lciIsIlJlamVjdGVkIE1lcm8gU2hhcmUgQ3VzdG9tZXIiLCJHZW5lcmF0ZSBGaWxlIEZvcm1hdCIsIlZpZXcgQmlsbGluZyIsIk1lcm9TaGFyZSBEZXRhaWwgUmVwb3J0IiwiUmVuZXcgTWVyb3NoYXJlIiwiT2xkIFJlcXVlc3QgTG9nIiwiTWVyb1NoYXJlIFRyYW5zYWN0aW9uIFJlcG9ydCIsIkJPTGlua2VkIFN1bW1hcnkgUmVwb3J0IiwiUmVzZXQgTWVybyBTaGFyZSBUcmFuc2FjdGlvbiBQSU4iLCJCT0xpbmtlZCBUcmFuc2FjdGlvbiBSZXBvcnQiLCJQYXltZW50IFJlcG9ydCIsIk1lcm8gU2hhcmUgQ3VzdG9tZXIgTWFuYWdlbWVudCIsIkRlbWF0IEFNQyBSZXBvcnQiLCJCYXRjaCBSZW5ld2FsIFJlcG9ydCIsIlJlcG9ydCIsIkJpbGxpbmciLCJNeSBCYW5rIFJlcXVlc3QiLCJNeSBFRElTIiwiQnJvYWRjYXN0IE1lc3NhZ2luZyIsIkRlbWF0IFJlbmV3IE1hbmFnZW1lbnQiLCJCYXRjaCBSZW5ld2FsIl0sImlzVGVtcCI6ZmFsc2UsImlzQXBwcm92YWxSZXF1aXJlZCI6dHJ1ZSwiaXNEcEFkbWluIjpmYWxzZX0.pSvtL8G9y_NKgDuJRD-VZcW-PVDhOQt8giagkGgdnSM"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "170"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"statusCode\": 200,\n    \"passwordPolicyChanged\": false,\n    \"passwordExpired\": false,\n    \"changePassword\": false,\n    \"accountExpired\": false,\n    \"dematExpired\": false,\n    \"message\": \"Log in successful.\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Login-checker",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var auth = pm.response.headers.get(\"Authorization\");\r",
+											" pm.collectionVariables.set(\"DP_C_Auth\", auth);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"D-14700-checker\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/dp/auth/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"dp",
+										"auth",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Register meroshare customer",
+			"item": [
+				{
+					"name": "Register- maker",
+					"item": [
+						{
+							"name": "New Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"value =JSON.parse(responseBody) //to parse json response\r",
+											"//Account name \r",
+											"var accountName =value[0].accountName\r",
+											"pm.collectionVariables.set(\"accountName\",accountName);\r",
+											"//Account number\r",
+											"var accountNumber=value[0].accountNumber\r",
+											"pm.collectionVariables.set(\"accountNumber\",accountNumber);\r",
+											"//Account open date\r",
+											"var accountOpenDate=value[0].accountOpenDate\r",
+											"pm.collectionVariables.set(\"accountOpenDate\",accountOpenDate);\r",
+											"//Account status\r",
+											"var accountStatus=value[0].accountStatus\r",
+											"pm.collectionVariables.set(\"accountStatus\",accountStatus);\r",
+											"//Citizen code\r",
+											"var citizenCode=value[0].citizenCode\r",
+											"pm.collectionVariables.set(\"citizenCode\",citizenCode);\r",
+											"//address\r",
+											"var address=value[0].address\r",
+											"pm.collectionVariables.set(\"address\",address);\r",
+											"//bankName\r",
+											"var bankName=value[0].bankName\r",
+											"pm.collectionVariables.set(\"bankName\",bankName);\r",
+											"//citizenshipNumber\r",
+											"var citizenshipNumber=value[0].citizenshipNumber\r",
+											"pm.collectionVariables.set(\"citizenshipNumber\",citizenshipNumber);\r",
+											"//contactNumber\r",
+											"var contactNumber=value[0].contactNumber\r",
+											"pm.collectionVariables.set(\"contactNumber\",contactNumber);\r",
+											"//customerType\r",
+											"var customerType=value[0].customerType\r",
+											"pm.collectionVariables.set(\"customerType\",customerType);\r",
+											"//dateOfBirth\r",
+											"var dateOfBirth=value[0].dateOfBirth\r",
+											"pm.collectionVariables.set(\"dateOfBirth\",dateOfBirth);\r",
+											"//email\r",
+											"var email=value[0].email\r",
+											"pm.collectionVariables.set(\"email\",email);\r",
+											"//fatherMotherName\r",
+											"var fatherMotherName=value[0].fatherMotherName\r",
+											"pm.collectionVariables.set(\"fatherMotherName\",fatherMotherName);\r",
+											"//grandfatherSpouseName\r",
+											"var grandfatherSpouseName=value[0].grandfatherSpouseName\r",
+											"pm.collectionVariables.set(\"grandfatherSpouseName\",grandfatherSpouseName);\r",
+											"//gender\r",
+											"var gender=value[0].gender\r",
+											"pm.collectionVariables.set(\"gender\",gender);\r",
+											"//issuedDate\r",
+											"var issuedDate=value[0].issuedDate\r",
+											"pm.collectionVariables.set(\"issuedDate\",issuedDate);\r",
+											"//issuedFrom\r",
+											"var issuedFrom=value[0].issuedFrom\r",
+											"pm.collectionVariables.set(\"issuedFrom\",issuedFrom);\r",
+											"//regexCitizenNumber\r",
+											"var regexCitizenNumber=value[0].regexCitizenNumber\r",
+											"pm.collectionVariables.set(\"regexCitizenNumber\",regexCitizenNumber);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/detail/{{DP_ID}}/{{BOID}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"detail",
+										"{{DP_ID}}",
+										"{{BOID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.variables.set('pwdDeliveryType','SET_NOW');\r",
+											"pm.variables.set('password','admin1');\r",
+											"pm.collectionVariables.set('profileId','1');\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"passwordSetUp\": {\r\n        \"pwdDeliveryType\": \"{{pwdDeliveryType}}\",\r\n        \"password\": \"{{password}}\",\r\n        \"confirmPassword\": \"{{password}}\"\r\n    },\r\n    \"clientId\": {{DP_ID}},\r\n    \"boid\": \"{{BOID}}\",\r\n    \"kycDetail\": {\r\n        \"accountName\": \"{{accountName}}\",\r\n        \"accountNumber\": \"{{accountNumber}}\",\r\n        \"accountOpenDate\": \"{{accountOpenDate}}\",\r\n        \"accountStatus\": \"{{accountStatus}}\",\r\n        \"address\": \"{{address}}\",\r\n        \"bankName\": \"{{bankName}}\",\r\n        \"boid\": \"13014700{{BOID}}\",\r\n        \"citizenCode\": \"{{citizenCode}}\",\r\n        \"citizenshipNumber\": \"{{citizenshipNumber}}\",\r\n        \"contactNumber\": \"{{contactNumber}}\",\r\n        \"customerType\": \"{{customerType}}\",\r\n        \"dateOfBirth\": \"{{dateOfBirth}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"fatherMotherName\": \"{{fatherMotherName}}\",\r\n        \"gender\": \"{{gender}}\",\r\n        \"grandfatherSpouseName\": \"{{grandfatherSpouseName}}\",\r\n        \"issuedDate\": \"{{issuedDate}}\",\r\n        \"issuedFrom\": \"{{issuedFrom}}\",\r\n        \"name\": \"{{accountName}}\",\r\n        \"regexCitizenNumber\": \"{{regexCitizenNumber}}\",\r\n        \"capitalId\": {{DP}},\r\n        \"demat\": \"130{{DP}}{{BOID}}\",\r\n        \"capitalCode\": \"{{DP}}\"\r\n    },\r\n    \"username\": \"{{BOID}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"address\": \"{{address}}\",\r\n    \"contact\": \"{{contactNumber}}\",\r\n    \"profileId\": \"{{profileId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register - Approve(Checker)",
+					"item": [
+						{
+							"name": "CREATE PENDING",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"value =JSON.parse(responseBody) //to parse json response ",
+											"var id =value.object[0].id",
+											"console.log(id)",
+											"pm.collectionVariables.set(\"Create_Customer\",id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"filterFieldParams\": [\r\n        {\r\n            \"key\": \"kycDetail.name\",\r\n            \"alias\": \"Name\"\r\n        },\r\n        {\r\n            \"key\": \"kycDetail.citizenshipNumber\",\r\n            \"alias\": \"Citizenship\"\r\n        },\r\n        {\r\n            \"key\": \"kycDetail.demat\",\r\n            \"alias\": \"Demat\"\r\n        }\r\n    ],\r\n    \"page\": 1,\r\n    \"size\": 20,\r\n    \"searchRoleViewConstants\": \"VIEW_APPROVE_CREATE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/search",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/approve/CreateApprove/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"approve",
+										"CreateApprove",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EDIT",
+			"item": [
+				{
+					"name": "Edit-maker",
+					"item": [
+						{
+							"name": "Edit",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"profileId\": {{profileId}},\r\n    \"contact\": \"{{$randomPhoneNumber}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"address\": \"{{$randomStreetAddress}}\",\r\n    \"kycDetail\": {\r\n        \"accountName\": \"{{accountName}}\",\r\n        \"accountNumber\": \"{{accountNumber}}\",\r\n        \"accountOpenDate\": \"{{accountOpenDate}}\",\r\n        \"accountStatus\": \"{{accountStatus}}\",\r\n        \"address\": \"{{address}}\",\r\n        \"bankName\": \"{{bankName}}\",\r\n        \"boid\": \"13014700{{BOID}}\",\r\n        \"citizenCode\": \"{{citizenCode}}\",\r\n        \"citizenshipNumber\": \"{{citizenshipNumber}}\",\r\n        \"contactNumber\": \"{{contactNumber}}\",\r\n        \"customerType\": \"{{customerType}}\",\r\n        \"dateOfBirth\": \"{{dateOfBirth}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"fatherMotherName\": \"{{fatherMotherName}}\",\r\n        \"gender\": \"{{gender}}\",\r\n        \"grandfatherSpouseName\": \"{{grandfatherSpouseName}}\",\r\n        \"issuedDate\": \"{{issuedDate}}\",\r\n        \"issuedFrom\": \"{{issuedFrom}}\",\r\n        \"name\": \"{{accountName}}\",\r\n        \"regexCitizenNumber\": \"{{regexCitizenNumber}}\",\r\n        \"capitalId\": {{DP_ID}},\r\n        \"demat\": \"130{{DP}}{{BOID}}\",\r\n        \"capitalCode\": \"{{DP}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EDIT-checker",
+					"item": [
+						{
+							"name": "Edit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/approve/EditApprove/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"approve",
+										"EditApprove",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "BLOCK",
+			"item": [
+				{
+					"name": "BLOCK-maker",
+					"item": [
+						{
+							"name": "Block",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{Create_Customer}},\r\n    \"remarks\": \"testing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/block/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"block",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BLOCK-checker",
+					"item": [
+						{
+							"name": "BLOCK",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/approve/BlockApprove/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"approve",
+										"BlockApprove",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "UNBLOCK",
+			"item": [
+				{
+					"name": "UNBLOCK-maker",
+					"item": [
+						{
+							"name": "UnBlock",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{Create_Customer}},\r\n    \"remarks\": \"testing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/unblock/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"unblock",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UNBLOCK- checker",
+					"item": [
+						{
+							"name": "UNBLOCK",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/approve/UnBlockApprove/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"approve",
+										"UnBlockApprove",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ADD BO",
+			"item": [
+				{
+					"name": "ADD BO-maker",
+					"item": [
+						{
+							"name": "fetch detail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"value =JSON.parse(responseBody) //to parse json response\r",
+											"var dependentId =value.id\r",
+											"pm.collectionVariables.set(\"dependentId\",dependentId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/kycDetail/{{ADD_BO}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										"kycDetail",
+										"{{ADD_BO}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD BO",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"boid\": \"{{ADD_BO}}\",\r\n    \"parentId\": \"{{Create_Customer}}\",\r\n    \"dependentId\": {{dependentId}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CREATE-DEPENDENT-checker",
+					"item": [
+						{
+							"name": "CREATE DEPENDENT PENDING LIST",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"value =JSON.parse(responseBody) //to parse json response ",
+											"var id =value.object[0].id",
+											"console.log(id)",
+											"pm.collectionVariables.set(\"create_dependent\",id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"filterFieldParams\": [\r\n        {\r\n            \"key\": \"dependentCustomer.name\",\r\n            \"alias\": \"Name\"\r\n        },\r\n        {\r\n            \"key\": \"dependentCustomer.citizenshipNumber\",\r\n            \"alias\": \"Citizenship\"\r\n        },\r\n        {\r\n            \"key\": \"dependentCustomer.demat\",\r\n            \"alias\": \"Demat\"\r\n        }\r\n    ],\r\n    \"page\": 1,\r\n    \"size\": 20,\r\n    \"searchRoleViewConstants\": \"VIEW_APPROVE_CREATE_DEPENDENT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/search",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE DEPENDENT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/approve/CreateApprove/{{create_dependent}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										"approve",
+										"CreateApprove",
+										"{{create_dependent}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Delete BO",
+			"item": [
+				{
+					"name": "Delete Depenedent- maker",
+					"item": [
+						{
+							"name": "delete dependent -maker",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{create_dependent}},\r\n    \"remarks\": \"testing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/delete/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										"delete",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE-DEPENDENT",
+					"item": [
+						{
+							"name": "DELETE DEPENDENT LIST",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"value =JSON.parse(responseBody) //to parse json response ",
+											"var id =value.object[0].id",
+											"console.log(id)",
+											"pm.collectionVariables.set(\"Dpendent_customer\",id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"filterFieldParams\": [\r\n        {\r\n            \"key\": \"kycDetail.name\",\r\n            \"alias\": \"Name\"\r\n        },\r\n        {\r\n            \"key\": \"kycDetail.citizenshipNumber\",\r\n            \"alias\": \"Citizenship\"\r\n        },\r\n        {\r\n            \"key\": \"kycDetail.demat\",\r\n            \"alias\": \"Demat\"\r\n        }\r\n    ],\r\n    \"page\": 1,\r\n    \"size\": 10,\r\n    \"searchRoleViewConstants\": \"VIEW_APPROVE_DELETE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/search",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE DEPENDENT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// value =JSON.parse(responseBody) //to parse json response ",
+											"// var id =value.object[0].id",
+											"// console.log(id)",
+											"// pm.collectionVariables.set(\"ID_Customer\",id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"filterFieldParams\": [\r\n        {\r\n            \"key\": \"kycDetail.name\",\r\n            \"alias\": \"Name\"\r\n        },\r\n        {\r\n            \"key\": \"kycDetail.citizenshipNumber\",\r\n            \"alias\": \"Citizenship\"\r\n        },\r\n        {\r\n            \"key\": \"kycDetail.demat\",\r\n            \"alias\": \"Demat\"\r\n        }\r\n    ],\r\n    \"page\": 1,\r\n    \"size\": 10,\r\n    \"searchRoleViewConstants\": \"VIEW_APPROVE_DELETE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/dependentCustomer/approve/DeleteApprove/{{Dpendent_customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"dependentCustomer",
+										"approve",
+										"DeleteApprove",
+										"{{Dpendent_customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Renew customer",
+			"item": [
+				{
+					"name": "Renew customer-maker",
+					"item": [
+						{
+							"name": "Renew",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{Create_Customer}},\r\n    \"remarks\": \"testing\",\r\n    \"renewYears\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/renew/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"renew",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "RENEWAL- chcker",
+					"item": [
+						{
+							"name": "RENEWAL",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/approve/RenewApprove/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"approve",
+										"RenewApprove",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "RESET Meroshare Password",
+			"item": [
+				{
+					"name": "Password through email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DP_M_Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordSetUp\": {\r\n        \"pwdDeliveryType\": \"EMAIL\"\r\n    },\r\n    \"remarks\": \"Testing\",\r\n    \"id\": {{Create_Customer}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DP_URL}}/meroShare/reset/",
+							"host": [
+								"{{DP_URL}}"
+							],
+							"path": [
+								"meroShare",
+								"reset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password through set now",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DP_M_Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordSetUp\": {\r\n        \"pwdDeliveryType\": \"SET_NOW\",\r\n        \"password\": \"admin\",\r\n        \"confirmPassword\": \"admin\"\r\n    },\r\n    \"remarks\": \"testing\",\r\n    \"id\": {{Create_Customer}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DP_URL}}/meroShare/reset/",
+							"host": [
+								"{{DP_URL}}"
+							],
+							"path": [
+								"meroShare",
+								"reset",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reset transaction pin-meroshare",
+			"item": [
+				{
+					"name": "Reset pin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{DP_M_Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionPINSetUpModel\": {\r\n        \"transactionPINDeliveryType\": \"SET_NOW\",\r\n        \"newTransactionPIN\": \"1111\",\r\n        \"confirmTransactionPIN\": \"1111\"\r\n    },\r\n    \"remarks\": \"testing\",\r\n    \"id\": {{Create_Customer}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DP_URL}}/meroShare/reset/transactionPIN/",
+							"host": [
+								"{{DP_URL}}"
+							],
+							"path": [
+								"meroShare",
+								"reset",
+								"transactionPIN",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Delete- maker",
+					"item": [
+						{
+							"name": "Delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_M_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {{Create_Customer}},\r\n    \"remarks\": \"testing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/delete/",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"delete",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE-checker",
+					"item": [
+						{
+							"name": "Delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{DP_C_Auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DP_URL}}/meroShare/approve/DeleteApprove/{{Create_Customer}}",
+									"host": [
+										"{{DP_URL}}"
+									],
+									"path": [
+										"meroShare",
+										"approve",
+										"DeleteApprove",
+										"{{Create_Customer}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DP_M_Auth",
+			"value": ""
+		},
+		{
+			"key": "DP_C_Auth",
+			"value": ""
+		},
+		{
+			"key": "ADD_BO",
+			"value": "00074402"
+		},
+		{
+			"key": "dependentId",
+			"value": "30",
+			"type": "string"
+		},
+		{
+			"key": "DP_ID",
+			"value": "9"
+		},
+		{
+			"key": "accountName",
+			"value": ""
+		},
+		{
+			"key": "accountNumber",
+			"value": ""
+		},
+		{
+			"key": "accountOpenDate",
+			"value": ""
+		},
+		{
+			"key": "accountStatus",
+			"value": ""
+		},
+		{
+			"key": "citizenCode",
+			"value": ""
+		},
+		{
+			"key": "Create_Customer",
+			"value": ""
+		},
+		{
+			"key": "Dpendent_customer",
+			"value": ""
+		},
+		{
+			"key": "CutomerADD_BO",
+			"value": ""
+		},
+		{
+			"key": "address",
+			"value": ""
+		},
+		{
+			"key": "bankName",
+			"value": ""
+		},
+		{
+			"key": "citizenshipNumber",
+			"value": ""
+		},
+		{
+			"key": "contactNumber",
+			"value": ""
+		},
+		{
+			"key": "customerType",
+			"value": ""
+		},
+		{
+			"key": "dateOfBirth",
+			"value": ""
+		},
+		{
+			"key": "fatherMotherName",
+			"value": ""
+		},
+		{
+			"key": "grandfatherSpouseName",
+			"value": ""
+		},
+		{
+			"key": "gender",
+			"value": ""
+		},
+		{
+			"key": "issuedDate",
+			"value": ""
+		},
+		{
+			"key": "issuedFrom",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "regexCitizenNumber",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "profileId",
+			"value": ""
+		},
+		{
+			"key": "BOID",
+			"value": "00009558",
+			"type": "string"
+		},
+		{
+			"key": "DP",
+			"value": "14700",
+			"type": "string"
+		},
+		{
+			"key": "create_dependent",
+			"value": ""
+		},
+		{
+			"key": "DP_URL",
+			"value": "http://172.16.0.38:12080/casba-dp-web/api",
+			"type": "string"
+		}
+	]
+}
